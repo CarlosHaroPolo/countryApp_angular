@@ -15,18 +15,18 @@ export class CountryPageComponent implements OnInit {
 
 public country?:Country;
 
-//trabajemos con el observabor para trabajar de forma dinamica
+//trabajemos con el observador para trabajar de forma dinámica
   constructor(private activatedRoute:ActivatedRoute , private service:CountriesService,private router:Router){
-   // redireccionar cuando si es incorrecta
+   // redirection cuando si es incorrecta
   }
 
   ngOnInit(): void {
-    //ya tome la informacion del id
+    //ya tome la información del id
     this.activatedRoute.params
     .pipe(
-      //basicamente recibe los parametrso anteriores y e objetivo es devolver un nuevo observabol
+      //básicamente recibe los parámetros anteriores y e objetivo es devolver un nuevo observadlo
       switchMap(({id})=> this.service.searchCountryByAlphaCode(id))
-    ) // na no nos da los param sino nos entrea el arreglo de conuntry
+    )
     .subscribe(country=>{
       if(!country)   return this.router.navigateByUrl('');
       return this.country= country;
